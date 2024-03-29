@@ -1,0 +1,9 @@
+.snake {
+  background-color: var(--swatch--brand);
+  border: var(--border-width--main) solid var(--theme--text);
+}
+
+.food {
+  background-color: var(--theme--text);
+  border: var(--border-width--main) solid var(--theme--text);
+}
