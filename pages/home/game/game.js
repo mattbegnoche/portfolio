@@ -2,11 +2,11 @@ import {
   SNAKE_SPEED,
   update as updateSnake,
   draw as drawSnake,
-} from "./game/snake.js";
+} from "./snake.js";
 
-import { update as updateFood, draw as drawFood } from "./game/food.js";
-import { getSnakeHead, snakeIntersection } from "./game/snake.js";
-import { outsideGrid } from "./game/grid.js";
+import { update as updateFood, draw as drawFood } from "./food.js";
+import { getSnakeHead, snakeIntersection } from "./snake.js";
+import { outsideGrid } from "./grid.js";
 
 // prevent the screen from moving when the game is active
 window.addEventListener(
