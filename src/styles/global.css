@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --color-ink: #eef0f3;
+  --color-paper: #05070d;
+  --color-accent: #46d4b1;
+  --color-muted: #9a9a9a;
+  --color-hairline: #2a2f3a;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.content-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: var(--color-ink);
+}
+
+.content-body h3 {
+  margin-top: 0.5rem;
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+
+.content-body ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.content-body a {
+  color: var(--color-accent);
+}
+
+.content-body a:hover {
+  text-decoration: underline;
+}

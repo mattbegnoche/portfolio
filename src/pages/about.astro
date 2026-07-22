@@ -1,0 +1,65 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const roles = [
+  {
+    title: "Website Developer",
+    org: "GoGuardian",
+    period: "Jun. 2024 – Present",
+    bullets: ["Full-time"],
+  },
+  {
+    title: "Website Developer",
+    org: "One Branding",
+    period: "Feb. 2022 – Present",
+    bullets: ["Freelance", "Worked with clients including Yelp and IGN"],
+  },
+  {
+    title: "Logistics Officer",
+    org: "Iowa National Guard",
+    period: "Jun. 2022 – Present",
+    bullets: [],
+  },
+];
+---
+
+<BaseLayout title="About">
+  <p class="font-mono text-sm text-muted">/ about</p>
+
+  <div class="mt-6 max-w-xl">
+    <p class="text-ink">
+      I'm a software engineer focused on full-stack web development, currently building at
+      GoGuardian. Outside of that I take on freelance web projects through One Branding and build
+      local-first tools for myself, like LlamaWhisperer.
+    </p>
+    <p class="mt-4 text-sm text-muted">
+      Draft note: replace this paragraph with your own voice — the placeholder LinkedIn summary
+      didn't say much specific to you, so this is a first pass based on your work history.
+    </p>
+  </div>
+
+  <section class="mt-16">
+    <p class="font-mono text-sm text-muted">/ experience</p>
+    <div class="mt-6">
+      {
+        roles.map((role) => (
+          <div class="border-b border-hairline py-6 first:pt-0 last:border-none">
+            <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+              <h3 class="text-base font-medium">
+                {role.title} &mdash; {role.org}
+              </h3>
+              <p class="font-mono text-xs text-muted">{role.period}</p>
+            </div>
+            {role.bullets.length > 0 && (
+              <ul class="mt-2 flex flex-col gap-1 text-sm text-muted">
+                {role.bullets.map((bullet) => (
+                  <li>{bullet}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
