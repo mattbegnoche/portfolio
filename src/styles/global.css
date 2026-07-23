@@ -178,16 +178,24 @@ body {
   }
 }
 
-.works-slider {
-  --swiper-pagination-color: var(--color-accent);
-  --swiper-pagination-bullet-inactive-color: var(--color-ink);
-  --swiper-pagination-bullet-inactive-opacity: 0.2;
-  --swiper-pagination-bullet-size: 8px;
-  overflow: visible;
+.status-dot {
+  animation: status-blink 3s ease-in-out infinite;
 }
 
-.works-slider-pagination {
-  position: static;
+@keyframes status-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-dot {
+    animation: none;
+  }
 }
 
 .theme-toggle .icon-moon {

@@ -1,4 +1,6 @@
 ---
+import Card from "./Card.astro";
+
 interface Props {
   quote: string;
   attribution: string;
@@ -8,9 +10,9 @@ interface Props {
 const { quote, attribution, avatar } = Astro.props;
 ---
 
-<div class="rounded-s bg-surface p-6">
+<Card rounded="s" class="p-6">
   <p class="font-mono text-xs text-ink/50 uppercase">Feedback</p>
-  <p class="mt-3 text-lg font-medium">{quote}</p>
+  <p class="mt-3 text-lg font-bold">{quote}</p>
   <div class="mt-4 flex items-center gap-3">
     {
       avatar && (
@@ -19,4 +21,4 @@ const { quote, attribution, avatar } = Astro.props;
     }
     <p class="text-sm text-ink/60">{attribution}</p>
   </div>
-</div>
+</Card>

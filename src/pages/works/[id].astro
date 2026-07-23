@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Card from "../../components/Card.astro";
 import QuoteBlock from "../../components/QuoteBlock.astro";
 import CloseIcon from "../../components/icons/CloseIcon.astro";
 import { getCollection, render } from "astro:content";
@@ -30,31 +31,36 @@ const { Content } = await render(project);
 
     <div class="flex items-center gap-3">
       {icon && <img src={icon} alt="" class="h-10 w-10 rounded-xs object-contain" />}
-      <h1 class="text-3xl font-medium">{title}</h1>
+      <h1 class="text-3xl font-bold">{title}</h1>
     </div>
     <p class="mt-3 max-w-xl text-ink/60">{description}</p>
   </section>
 
   {mockup && (
     <section class="mb-10">
-      <img src={mockup} alt="" class="w-full rounded-xxl shadow-lg shadow-black/10" loading="lazy" />
+      <img
+        src={mockup}
+        alt=""
+        class="w-full rounded-xxl shadow-lg shadow-black/10"
+        loading="lazy"
+      />
     </section>
   )}
 
-  <section class="grid grid-cols-3 gap-4 rounded-l bg-surface p-6">
+  <Card as="section" rounded="l" class="grid grid-cols-3 gap-4 p-6">
     <div>
       <p class="font-mono text-xs text-ink/50 uppercase">Type</p>
-      <p class="mt-1 font-medium">{type}</p>
+      <p class="mt-1 font-bold">{type}</p>
     </div>
     <div>
       <p class="font-mono text-xs text-ink/50 uppercase">Role</p>
-      <p class="mt-1 font-medium">{role}</p>
+      <p class="mt-1 font-bold">{role}</p>
     </div>
     <div>
       <p class="font-mono text-xs text-ink/50 uppercase">Year</p>
-      <p class="mt-1 font-medium">{year}</p>
+      <p class="mt-1 font-bold">{year}</p>
     </div>
-  </section>
+  </Card>
 
   <section class="content-body mt-10">
     <Content />

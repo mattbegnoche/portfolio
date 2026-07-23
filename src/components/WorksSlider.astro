@@ -9,35 +9,36 @@ interface Props {
 const { projects } = Astro.props;
 ---
 
-<div class="works-slider swiper">
+<div class="works-slider swiper h-120 sm:h-85">
   <div class="swiper-wrapper">
     {
       projects.map((project) => (
-        <div class="swiper-slide">
+        <div class="swiper-slide h-full rounded-xxl shadow-lg shadow-black/5">
           <WorkCard project={project} />
         </div>
       ))
     }
   </div>
-  <div class="works-slider-pagination swiper-pagination mt-6 flex! items-center justify-center gap-2"></div>
 </div>
 
 <script>
   import Swiper from "swiper";
-  import { Pagination } from "swiper/modules";
+  import { EffectCards, Keyboard, Mousewheel } from "swiper/modules";
   import "swiper/css";
-  import "swiper/css/pagination";
+  import "swiper/css/effect-cards";
 
   const el = document.querySelector<HTMLElement>(".works-slider");
   if (el) {
     new Swiper(el, {
-      modules: [Pagination],
-      slidesPerView: 1,
-      spaceBetween: 24,
-      autoHeight: true,
-      pagination: {
-        el: el.querySelector(".works-slider-pagination"),
-        clickable: true,
+      modules: [EffectCards, Keyboard, Mousewheel],
+      effect: "cards",
+      grabCursor: true,
+      keyboard: { enabled: true },
+      mousewheel: { enabled: true, forceToAxis: true },
+      cardsEffect: {
+        slideShadows: false,
+        perSlideOffset: 10,
+        perSlideRotate: 3,
       },
     });
   }

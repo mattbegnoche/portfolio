@@ -1,4 +1,6 @@
 ---
+import Card from "./Card.astro";
+
 interface Props {
   title: string;
   org: string;
@@ -10,7 +12,7 @@ interface Props {
 const { title, org, employmentType, period, logo } = Astro.props;
 ---
 
-<div class="flex items-center gap-4 rounded-l bg-surface p-6">
+<Card rounded="l" class="flex items-center gap-4 p-6">
   {
     logo ? (
       <img src={logo} alt="" class="h-10 w-10 shrink-0 rounded-xs object-contain" loading="lazy" />
@@ -22,9 +24,9 @@ const { title, org, employmentType, period, logo } = Astro.props;
   }
   <div class="flex flex-1 flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
     <div>
-      <p class="font-medium">{title} &mdash; {org}</p>
+      <p class="font-bold">{title} &mdash; {org}</p>
       <p class="text-xs text-ink/50">{employmentType}</p>
     </div>
     <p class="font-mono text-xs text-ink/50 uppercase">{period}</p>
   </div>
-</div>
+</Card>

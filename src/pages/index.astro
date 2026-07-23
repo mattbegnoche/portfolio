@@ -6,27 +6,31 @@ import WorksSlider from "../components/WorksSlider.astro";
 import TechStack from "../components/TechStack.astro";
 import { getCollection } from "astro:content";
 
-const projects = (await getCollection("projects", ({ data }) => data.featured)).sort(
-  (a, b) => Number(b.data.year) - Number(a.data.year),
-);
+const projects = (
+  await getCollection("projects", ({ data }) => data.featured)
+).sort((a, b) => Number(b.data.year) - Number(a.data.year));
 ---
 
 <BaseLayout title="Home">
   <section id="hero" class="flex flex-col items-center gap-6 py-12 text-center">
-    <div class="relative">
+    <div class="relative p-2 bg-surface rounded-4xl">
       <img
         src="/images/memoji/hero.avif"
         alt="Matt Begnoche"
         class="h-24 w-24 rounded-full object-cover"
       />
       <span
-        class="absolute right-0 bottom-0 h-4 w-4 rounded-full bg-green ring-2 ring-paper"
+        class="absolute right-0 bottom-0 h-4 w-4 rounded-full bg-black ring-2 ring-paper"
         aria-hidden="true"
         title="Available"
-      ></span>
+      >
+        <span class="status-dot block h-full w-full rounded-full bg-green"></span>
+      </span>
     </div>
-    <h1 class="max-w-xl text-3xl font-medium sm:text-4xl">
-      Hi, I'm Matt. <span class="text-ink/50">I press buttons and interfaces happen</span>
+    <h1 class="max-w-xl text-3xl font-bold sm:text-4xl">
+      Hi, I'm Matt. <span class="text-ink/50"
+        >I press buttons and interfaces happen</span
+      >
     </h1>
   </section>
 
@@ -42,11 +46,11 @@ const projects = (await getCollection("projects", ({ data }) => data.featured)).
     <div class="flex items-center justify-between">
       <div>
         <p class="font-mono text-xs text-ink/50 uppercase">Projects</p>
-        <h2 class="mt-2 text-2xl font-medium">Latest Projects</h2>
+        <h2 class="mt-2 text-2xl font-bold">Latest Projects</h2>
       </div>
       <a
         href="/works"
-        class="inline-flex items-center gap-1.5 rounded-pill bg-surface px-4 py-2 text-sm font-medium transition-colors duration-200 hover:bg-black/5 dark:hover:bg-white/10"
+        class="inline-flex items-center gap-1.5 rounded-pill bg-surface px-4 py-2 text-sm font-bold transition-colors duration-200 hover:bg-black/5 dark:hover:bg-white/10"
       >
         View All
       </a>

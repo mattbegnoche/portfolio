@@ -1,4 +1,5 @@
 ---
+import Card from "./Card.astro";
 import LocationIcon from "./icons/LocationIcon.astro";
 import LocationTickIcon from "./icons/LocationTickIcon.astro";
 
@@ -7,59 +8,77 @@ const activePinIndex = 3;
 ---
 
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-6">
-  <div class="flex flex-col justify-between gap-6 rounded-xxl bg-surface p-6 sm:col-span-3">
-    <p class="text-lg font-medium">
-      Full-stack developer with a love for clean UI and fast apps
+  <Card
+    class="flex flex-col justify-between gap-6 p-6 sm:col-span-3 sm:row-span-2 pb-0"
+  >
+    <p class="text-3xl font-bold">
+      Full-stack developer <span class="text-ink/50"
+        >with a love for clean UI and fast apps</span
+      >
     </p>
     <img
       src="/images/memoji/intro.avif"
       alt=""
-      class="h-40 w-40 rounded-xl object-cover"
+      class="h-70 w-70 rounded-xl object-cover mx-auto"
       loading="lazy"
     />
-  </div>
+  </Card>
 
-  <div class="flex flex-col justify-between gap-6 rounded-xxl bg-surface p-6 sm:col-span-3">
+  <Card class="flex flex-col justify-between gap-4 p-6 sm:col-span-3">
     <p class="font-mono text-xs text-ink/50 uppercase">Based In</p>
-    <p class="text-lg font-medium">Norwalk, Iowa</p>
+    <p class="text-2xl font-bold">Norwalk, Iowa</p>
     <div class="flex items-center justify-center gap-2">
       {
         Array.from({ length: pinCount }, (_, i) =>
           i === activePinIndex ? (
-            <LocationTickIcon class="h-9 w-9 text-accent" />
+            <LocationTickIcon class=" text-accent" />
           ) : (
-            <LocationIcon class="h-6 w-6 text-ink/10" />
+            <LocationIcon class=" text-ink/10" />
           ),
         )
       }
     </div>
-  </div>
+  </Card>
 
-  <div class="flex flex-col gap-4 rounded-xxl bg-surface p-6 sm:col-span-3">
+  <Card class="flex flex-col gap-4 p-6 pr-0 pb-0 sm:col-span-3 overflow-clip">
     <p class="font-mono text-xs text-ink/50 uppercase">Coding Since</p>
-    <p class="text-lg font-medium">January 2022</p>
-    <div class="rounded-xs border border-hairline bg-paper p-4">
+    <p class="text-2xl font-bold">January 2022</p>
+    <div
+      class="relative overflow-hidden rounded-xs border border-hairline bg-paper p-4 -mb-2 w-[110%] h-[110%]"
+    >
       <div class="flex gap-1.5">
         <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-yellow-400"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-green"></span>
       </div>
-      <pre class="mt-3 font-mono text-xs text-ink/60"><code>&lt;!DOCTYPE html&gt;
+      <pre
+        class="mt-3 font-mono text-xs text-ink/60"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
   &lt;head&gt;...&lt;/head&gt;
 &lt;/html&gt;</code></pre>
+      <div
+        class="pointer-events-none absolute top-0 right-0 h-full w-16 bg-linear-to-l from-paper to-transparent"
+        aria-hidden="true"
+      >
+      </div>
     </div>
-  </div>
+  </Card>
 
-  <div class="flex flex-col justify-between gap-6 rounded-xxl bg-surface p-6 sm:col-span-3">
+  <Card class="flex flex-col justify-between gap-6 p-6 sm:col-span-2">
     <p class="font-mono text-xs text-ink/50 uppercase">What I Do</p>
-    <p class="text-lg font-medium">Focused on fast builds, clean code, and smart design</p>
-  </div>
+    <p class="text-3xl font-bold">
+      Focused on fast builds, clean code, and <span class="text-ink/50"
+        >smart design</span
+      >
+    </p>
+  </Card>
 
-  <div class="flex flex-col justify-between gap-6 rounded-xxl bg-surface p-6 sm:col-span-6">
+  <Card class="flex flex-col justify-between gap-6 p-6 sm:col-span-4">
     <p class="font-mono text-xs text-ink/50 uppercase">Always Learning</p>
     <div class="flex items-center justify-between gap-4">
-      <p class="text-lg font-medium">Exploring Next.js &amp; TypeScript</p>
+      <p class="text-3xl font-bold">
+        <span class="text-ink/50">Exploring</span> Next.js &amp; TypeScript
+      </p>
       <img
         src="/images/memoji/growth.avif"
         alt=""
@@ -67,5 +86,5 @@ const activePinIndex = 3;
         loading="lazy"
       />
     </div>
-  </div>
+  </Card>
 </div>
