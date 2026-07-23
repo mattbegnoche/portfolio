@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from "astro:content";
+import WorkCard from "./WorkCard.astro";
+
+interface Props {
+  projects: CollectionEntry<"projects">[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="works-slider swiper">
+  <div class="swiper-wrapper">
+    {
+      projects.map((project) => (
+        <div class="swiper-slide">
+          <WorkCard project={project} />
+        </div>
+      ))
+    }
+  </div>
+  <div class="works-slider-pagination swiper-pagination mt-6 flex! items-center justify-center gap-2"></div>
+</div>
+
+<script>
+  import Swiper from "swiper";
+  import { Pagination } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/pagination";
+
+  const el = document.querySelector<HTMLElement>(".works-slider");
+  if (el) {
+    new Swiper(el, {
+      modules: [Pagination],
+      slidesPerView: 1,
+      spaceBetween: 24,
+      autoHeight: true,
+      pagination: {
+        el: el.querySelector(".works-slider-pagination"),
+        clickable: true,
+      },
+    });
+  }
+</script>

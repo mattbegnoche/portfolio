@@ -1,18 +1,41 @@
 @import "tailwindcss";
-@import "@fontsource/geist-sans/latin-400.css";
-@import "@fontsource/geist-sans/latin-500.css";
-@import "@fontsource/geist-sans/latin-700.css";
-@import "@fontsource/geist-mono/latin-400.css";
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@import "@fontsource/inter/latin-300.css";
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/inter/latin-700.css";
+@import "@fontsource/dm-mono/latin-400.css";
+@import "@fontsource/dm-mono/latin-500.css";
 
 @theme {
-  --font-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", monospace;
 
-  --color-ink: #eef0f3;
-  --color-paper: #05070d;
-  --color-accent: #46d4b1;
-  --color-muted: #9a9a9a;
-  --color-hairline: #2a2f3a;
+  --color-ink: #111111;
+  --color-paper: #ffffff;
+  --color-surface: #f7f7f7;
+  --color-accent: #1e6ef4;
+  --color-accent-dark: #1a5ecf;
+  --color-green: #35c759;
+  --color-hairline: #00000012;
+
+  --radius-xxxs: 8px;
+  --radius-xxs: 10px;
+  --radius-xs: 12px;
+  --radius-s: 16px;
+  --radius-m: 18px;
+  --radius-l: 24px;
+  --radius-xl: 28px;
+  --radius-xxl: 32px;
+  --radius-pill: 1000px;
+}
+
+:root[data-theme="dark"] {
+  --color-ink: #f2f2f2;
+  --color-paper: #0b0b0d;
+  --color-surface: #1c1c1f;
+  --color-hairline: #ffffff14;
 }
 
 body {
@@ -47,4 +70,134 @@ body {
 
 .content-body a:hover {
   text-decoration: underline;
+}
+
+.emoji-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  white-space: nowrap;
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.pill-default {
+  color: #845200;
+  background-color: #fff0c6;
+}
+
+.pill-warm-beige {
+  color: #71391e;
+  background-color: #fde2d5;
+}
+
+.pill-cloud-blue {
+  color: #5a6570;
+  background-color: #e4edf6;
+}
+
+.pill-mint-green {
+  color: #33683c;
+  background-color: #d8f0dc;
+}
+
+.pill-silver-fog {
+  color: #5e5e5f;
+  background-color: #e9e9ea;
+}
+
+.pill-light-orchid {
+  color: #65326c;
+  background-color: #f2ddf5;
+}
+
+.pill-icy-indigo {
+  color: #425088;
+  background-color: #e1e6fb;
+}
+
+.pill-sage-green {
+  color: #406733;
+  background-color: #dff0d9;
+}
+
+.pill-blush-pink {
+  color: #854040;
+  background-color: #f6e0e0;
+}
+
+.ticker-fade {
+  position: relative;
+}
+
+.ticker-fade::before,
+.ticker-fade::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4rem;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.ticker-fade::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-paper), transparent);
+}
+
+.ticker-fade::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-paper), transparent);
+}
+
+.ticker-track {
+  width: max-content;
+  animation: ticker-scroll 32s linear infinite;
+}
+
+.ticker-track-reverse {
+  animation-direction: reverse;
+}
+
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
+
+.works-slider {
+  --swiper-pagination-color: var(--color-accent);
+  --swiper-pagination-bullet-inactive-color: var(--color-ink);
+  --swiper-pagination-bullet-inactive-opacity: 0.2;
+  --swiper-pagination-bullet-size: 8px;
+  overflow: visible;
+}
+
+.works-slider-pagination {
+  position: static;
+}
+
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+  display: block;
 }

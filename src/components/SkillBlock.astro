@@ -1,0 +1,27 @@
+---
+interface Skill {
+  emoji: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  skills: Skill[];
+}
+
+const { title, skills } = Astro.props;
+---
+
+<div class="rounded-xxl bg-surface p-6">
+  <p class="font-mono text-xs text-ink/50 uppercase">{title}</p>
+  <ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+    {
+      skills.map((skill) => (
+        <li class="flex items-center gap-2 text-sm">
+          <span aria-hidden="true">{skill.emoji}</span>
+          {skill.label}
+        </li>
+      ))
+    }
+  </ul>
+</div>

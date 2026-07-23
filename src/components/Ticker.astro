@@ -1,0 +1,41 @@
+---
+const stats = [
+  { emoji: "🚀", text: "X+ Projects", color: "pill-default" },
+  { emoji: "🤝", text: "X+ Clients", color: "pill-warm-beige" },
+  { emoji: "🗓️", text: "X+ Years in Dev", color: "pill-cloud-blue" },
+  { emoji: "📱", text: "X+ Apps Built", color: "pill-mint-green" },
+  { emoji: "🌐", text: "X+ Websites", color: "pill-silver-fog" },
+];
+
+const focus = [
+  { emoji: "🧱", text: "Full Stack Dev", color: "pill-light-orchid" },
+  { emoji: "🎯", text: "UX Focused", color: "pill-icy-indigo" },
+  { emoji: "🔌", text: "API Builder", color: "pill-sage-green" },
+  { emoji: "⚛️", text: "React Expert", color: "pill-blush-pink" },
+  { emoji: "✨", text: "Pixel Perfect", color: "pill-default" },
+];
+---
+
+<div class="ticker-fade overflow-hidden" aria-hidden="true">
+  <p class="sr-only">Stats below are placeholders pending real numbers.</p>
+  <div class="ticker-track flex gap-3 py-1.5">
+    {
+      [...stats, ...stats].map((item) => (
+        <span class={`emoji-pill ${item.color}`}>
+          <span>{item.emoji}</span>
+          {item.text}
+        </span>
+      ))
+    }
+  </div>
+  <div class="ticker-track ticker-track-reverse mt-3 flex gap-3 py-1.5">
+    {
+      [...focus, ...focus].map((item) => (
+        <span class={`emoji-pill ${item.color}`}>
+          <span>{item.emoji}</span>
+          {item.text}
+        </span>
+      ))
+    }
+  </div>
+</div>

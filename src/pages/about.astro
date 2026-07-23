@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SkillBlock from "../components/SkillBlock.astro";
+import ExperienceBlock from "../components/ExperienceBlock.astro";
+import ValueBlock from "../components/ValueBlock.astro";
+
+const hardSkills = [
+  { emoji: "💻", label: "Web Development" },
+  { emoji: "🧩", label: "No-Code Tools" },
+  { emoji: "🎨", label: "UI/UX & Design" },
+  { emoji: "🗂️", label: "CMS Integration" },
+  { emoji: "🔍", label: "SEO Best Practices" },
+  { emoji: "⚡", label: "Speed Optimization" },
+  { emoji: "🧱", label: "Design Systems" },
+  { emoji: "🔁", label: "CI/CD Basics" },
+];
+
+const softSkills = [
+  { emoji: "💬", label: "Communication" },
+  { emoji: "🧠", label: "Problem-Solving" },
+  { emoji: "🤝", label: "Collaboration" },
+  { emoji: "⏱️", label: "Time Management" },
+  { emoji: "💡", label: "Creativity" },
+  { emoji: "✅", label: "Accountability" },
+  { emoji: "🔎", label: "Curiosity" },
+  { emoji: "🌱", label: "Adaptability" },
+];
+
+const experience = [
+  {
+    title: "Web Developer",
+    org: "GoGuardian",
+    employmentType: "Full-time",
+    period: "Jun 2024 – Present",
+    logo: "/images/logos/goguardian.svg",
+  },
+  {
+    title: "Web Developer",
+    org: "One Branding",
+    employmentType: "Freelance",
+    period: "Feb 2022 – Present",
+  },
+  {
+    title: "Logistics Officer",
+    org: "Iowa National Guard",
+    employmentType: "Part-time",
+    period: "Jun 2022 – Present",
+  },
+];
+
+const values = [
+  { emoji: "🧘", title: "Simplicity", description: "Clarity over complexity" },
+  { emoji: "⚡", title: "Efficiency", description: "Fast, but never rushed" },
+  { emoji: "♿", title: "Accessibility", description: "Built for real people" },
+  { emoji: "🎨", title: "Aesthetics", description: "Design that feels right" },
+];
+---
+
+<BaseLayout
+  title="About"
+  description="I'm Matt — a developer blending code, clarity, and creativity to craft scalable solutions."
+>
+  <section id="hero" class="py-12 text-center">
+    <span aria-hidden="true" class="text-2xl">🙂</span>
+    <h1 class="mt-3 text-3xl font-medium sm:text-4xl">
+      I design and build <span class="text-ink/50">fast, functional, and elegant experiences</span>
+    </h1>
+  </section>
+
+  <section class="mt-8">
+    <p class="font-mono text-xs text-ink/50 uppercase">Introduction</p>
+    <h2 class="mt-2 max-w-2xl text-2xl font-medium">
+      I'm a web developer crafting fast, accessible, and user-first experiences – blending code with
+      thoughtful design.
+    </h2>
+    <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <SkillBlock title="Hard Skills" skills={hardSkills} />
+      <SkillBlock title="Soft Skills" skills={softSkills} />
+    </div>
+  </section>
+
+  <section class="mt-16">
+    <p class="font-mono text-xs text-ink/50 uppercase">Work History</p>
+    <div class="mt-6 flex flex-col gap-4">
+      {experience.map((role) => <ExperienceBlock {...role} />)}
+    </div>
+  </section>
+
+  <section class="mt-16">
+    <p class="font-mono text-xs text-ink/50 uppercase">My Principles</p>
+    <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {values.map((value) => <ValueBlock {...value} />)}
+    </div>
+  </section>
+</BaseLayout>

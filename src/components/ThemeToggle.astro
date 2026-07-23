@@ -1,0 +1,26 @@
+---
+import SunIcon from "./icons/SunIcon.astro";
+import MoonIcon from "./icons/MoonIcon.astro";
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label="Toggle color theme"
+  title="Toggle color theme"
+  class="theme-toggle flex h-10 w-10 items-center justify-center rounded-m text-ink/70 transition-colors duration-200 hover:bg-black/5 hover:text-ink dark:hover:bg-white/10"
+>
+  <SunIcon class="icon-sun h-5 w-5" />
+  <MoonIcon class="icon-moon h-5 w-5" />
+</button>
+
+<script>
+  const button = document.getElementById("theme-toggle");
+
+  button?.addEventListener("click", () => {
+    const root = document.documentElement;
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    localStorage.setItem("theme", next);
+  });
+</script>

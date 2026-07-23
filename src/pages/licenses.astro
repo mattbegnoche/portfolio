@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const credits = [
+  { title: "Memojis", description: "Memojis from a diverse collection, free for commercial use." },
+  { title: "Emojis", description: "Emojis from the Emoji Mega Pack (iOS Apple Emojis), free for commercial use." },
+  { title: "Icons", description: "UI and tech-stack brand icons, free for commercial/personal use." },
+  { title: "Font", description: "Inter and DM Mono from Google Fonts, free for commercial use." },
+  { title: "Content", description: "Some content drafted with help from an AI assistant." },
+];
+---
+
+<BaseLayout title="Licenses">
+  <section id="hero" class="py-12 text-center">
+    <span aria-hidden="true" class="text-2xl">📄</span>
+    <h1 class="mt-3 text-3xl font-medium sm:text-4xl">
+      Licenses <span class="text-ink/50">Information</span>
+    </h1>
+    <p class="mx-auto mt-3 max-w-lg text-ink/60">
+      All graphical assets on this site are licensed for personal and commercial use. If you'd like to
+      use a specific asset, please check the credits below.
+    </p>
+  </section>
+
+  <section class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    {
+      credits.map((credit) => (
+        <div class="rounded-l bg-surface p-6">
+          <p class="font-medium">{credit.title}</p>
+          <p class="mt-1 text-sm text-ink/60">{credit.description}</p>
+        </div>
+      ))
+    }
+  </section>
+</BaseLayout>

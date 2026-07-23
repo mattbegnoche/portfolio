@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import QuoteBlock from "../../components/QuoteBlock.astro";
+import CloseIcon from "../../components/icons/CloseIcon.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { title, description, type, role, year, icon, mockup, quote, attribution, avatar, repoUrl, liveUrl } =
+  project.data;
+const { Content } = await render(project);
+---
+
+<BaseLayout title={title} description={description}>
+  <section id="hero" class="relative py-12">
+    <a
+      href="/works"
+      aria-label="Close"
+      class="absolute top-0 right-0 flex h-10 w-10 items-center justify-center rounded-full bg-surface transition-colors duration-200 hover:bg-black/5 dark:hover:bg-white/10"
+    >
+      <CloseIcon class="h-5 w-5" />
+    </a>
+
+    <div class="flex items-center gap-3">
+      {icon && <img src={icon} alt="" class="h-10 w-10 rounded-xs object-contain" />}
+      <h1 class="text-3xl font-medium">{title}</h1>
+    </div>
+    <p class="mt-3 max-w-xl text-ink/60">{description}</p>
+  </section>
+
+  {mockup && (
+    <section class="mb-10">
+      <img src={mockup} alt="" class="w-full rounded-xxl shadow-lg shadow-black/10" loading="lazy" />
+    </section>
+  )}
+
+  <section class="grid grid-cols-3 gap-4 rounded-l bg-surface p-6">
+    <div>
+      <p class="font-mono text-xs text-ink/50 uppercase">Type</p>
+      <p class="mt-1 font-medium">{type}</p>
+    </div>
+    <div>
+      <p class="font-mono text-xs text-ink/50 uppercase">Role</p>
+      <p class="mt-1 font-medium">{role}</p>
+    </div>
+    <div>
+      <p class="font-mono text-xs text-ink/50 uppercase">Year</p>
+      <p class="mt-1 font-medium">{year}</p>
+    </div>
+  </section>
+
+  <section class="content-body mt-10">
+    <Content />
+  </section>
+
+  {(repoUrl || liveUrl) && (
+    <section class="mt-6 flex gap-3 font-mono text-sm">
+      {repoUrl && (
+        <a href={repoUrl} class="text-accent hover:underline">
+          [Repo]
+        </a>
+      )}
+      {liveUrl && (
+        <a href={liveUrl} class="text-accent hover:underline">
+          [Live]
+        </a>
+      )}
+    </section>
+  )}
+
+  {quote && attribution && (
+    <section class="mt-10">
+      <QuoteBlock quote={quote} attribution={attribution} avatar={avatar} />
+    </section>
+  )}
+</BaseLayout>

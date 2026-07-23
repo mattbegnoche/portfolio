@@ -1,5 +1,5 @@
 ---
-import Header from "../components/Header.astro";
+import PillNav from "../components/PillNav.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
@@ -13,19 +13,32 @@ const { title, description = "Matthew Begnoche — software engineer" } = Astro.
 
 <html lang="en">
   <head>
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem("theme");
+        var theme =
+          stored === "light" || stored === "dark"
+            ? stored
+            : window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title} · Matthew Begnoche</title>
   </head>
   <body class="flex min-h-screen flex-col font-sans antialiased">
-    <Header />
-    <main class="mx-auto w-full max-w-3xl flex-1 px-6 py-16">
+    <main class="mx-auto w-full max-w-4xl flex-1 px-6 pt-28 pb-8">
       <slot />
     </main>
     <Footer />
+    <PillNav />
   </body>
 </html>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WorkCard from "../components/WorkCard.astro";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => Number(b.data.year) - Number(a.data.year),
+);
+---
+
+<BaseLayout title="Works" description="A curated set of projects I love.">
+  <section id="hero" class="py-12 text-center">
+    <h1 class="text-3xl font-medium sm:text-4xl">
+      Curated set <span class="text-ink/50">of projects I love</span>
+    </h1>
+  </section>
+
+  <section class="mt-8 flex flex-col gap-6">
+    {projects.map((project) => <WorkCard project={project} />)}
+  </section>
+</BaseLayout>

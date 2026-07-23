@@ -1,9 +1,11 @@
 ---
 title: LlamaWhisperer
 description: A macOS menu bar dictation app that runs 100% locally — no cloud APIs, no subscriptions, works offline.
+type: Personal Project
+role: Developer
+year: "2026"
 tags: [Swift, SwiftUI]
 repoUrl: https://github.com/mattbegnoche/LlamaWhisperer
-date: 2026-07-01
 featured: true
 ---
 

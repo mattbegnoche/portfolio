@@ -1,0 +1,81 @@
+---
+const categories = [
+  {
+    label: "Frontend",
+    tools: [
+      { name: "React", icon: "/images/tools/react.svg", blurb: "For building fast, interactive UIs" },
+      {
+        name: "Next.js",
+        icon: "/images/tools/nextjs.svg",
+        blurb: "React framework with routing & SSR",
+        invert: true,
+      },
+      { name: "TypeScript", icon: "/images/tools/typescript.svg", blurb: "Typed JavaScript for safer code" },
+      { name: "Astro", icon: "/images/tools/astro.svg", blurb: "Content-focused framework for fast sites", invert: true },
+    ],
+  },
+  {
+    label: "Backend",
+    tools: [
+      { name: "Node.js", icon: "/images/tools/nodejs.svg", blurb: "JavaScript runtime for servers" },
+      {
+        name: "Express",
+        icon: "/images/tools/express.svg",
+        blurb: "Minimal framework for APIs",
+        invert: true,
+      },
+      { name: "MongoDB", icon: "/images/tools/mongodb.svg", blurb: "Flexible NoSQL database system" },
+    ],
+  },
+  {
+    label: "Tools & DevOps",
+    tools: [
+      {
+        name: "Git & GitHub",
+        icon: "/images/tools/github.svg",
+        blurb: "Version control and collaboration",
+        invert: true,
+      },
+      { name: "Docker", icon: "/images/tools/docker.svg", blurb: "Containers for isolated environments" },
+    ],
+  },
+  {
+    label: "Design & Workflow",
+    tools: [
+      { name: "Figma", icon: "/images/tools/figma.svg", blurb: "UI design and collaboration tool" },
+      {
+        name: "Notion",
+        icon: "/images/tools/notion.svg",
+        blurb: "Planning and docs in one place",
+        invert: true,
+      },
+    ],
+  },
+];
+---
+
+<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+  {
+    categories.map((category) => (
+      <div>
+        <p class="font-mono text-xs text-ink/50 uppercase">{category.label}</p>
+        <div class="mt-4 flex flex-col gap-4">
+          {category.tools.map((tool) => (
+            <div class="flex items-center gap-3">
+              <img
+                src={tool.icon}
+                alt=""
+                class:list={["h-8 w-8 rounded-xxs", tool.invert && "dark:invert"]}
+                loading="lazy"
+              />
+              <div>
+                <p class="text-sm font-medium">{tool.name}</p>
+                <p class="text-xs text-ink/50">{tool.blurb}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</div>

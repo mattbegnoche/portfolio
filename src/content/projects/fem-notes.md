@@ -1,10 +1,12 @@
 ---
 title: FEM-Notes
 description: A full-stack note-taking app with Google sign-in, per-user data, real-time search, and a keyboard-navigable, responsive UI.
+type: Portfolio
+role: Developer
+year: "2026"
 tags: [Next.js, React, Postgres, Neon, Tailwind CSS, Radix UI, Vercel]
 repoUrl: https://github.com/mattbegnoche/FEM-Note-taking-web-app
 liveUrl: https://fem-note-taking-web-app.vercel.app/notes
-date: 2026-07-01
 featured: true
 ---
 

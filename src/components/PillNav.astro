@@ -1,0 +1,55 @@
+---
+import HomeIcon from "./icons/HomeIcon.astro";
+import FolderIcon from "./icons/FolderIcon.astro";
+import AboutIcon from "./icons/AboutIcon.astro";
+import MessageIcon from "./icons/MessageIcon.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const navItems = [
+  { href: "/", label: "Home", Icon: HomeIcon },
+  { href: "/works", label: "Works", Icon: FolderIcon },
+  { href: "/about", label: "About", Icon: AboutIcon },
+];
+const currentPath = Astro.url.pathname;
+
+const tooltipClass =
+  "pointer-events-none absolute top-full left-1/2 mt-2 -translate-x-1/2 whitespace-nowrap rounded-xxxs bg-ink px-2.5 py-1 font-mono text-[0.7rem] text-paper opacity-0 transition-opacity duration-150 group-hover:opacity-100";
+---
+
+<nav class="fixed inset-x-0 top-5 z-50 flex justify-center px-4">
+  <div class="flex items-center gap-1 rounded-xl border border-hairline bg-surface p-1.5 shadow-lg shadow-black/5">
+    {
+      navItems.map(({ href, label, Icon }) => {
+        const isActive = href === "/" ? currentPath === "/" : currentPath.startsWith(href);
+        return (
+          <a
+            href={href}
+            aria-label={label}
+            aria-current={isActive ? "page" : undefined}
+            class:list={[
+              "group relative flex h-10 w-10 items-center justify-center rounded-m transition-colors duration-200",
+              isActive ? "bg-accent text-white" : "text-ink/70 hover:bg-black/5 dark:hover:bg-white/10 hover:text-ink",
+            ]}
+          >
+            <Icon class="h-5 w-5" />
+            <span class={tooltipClass}>{label}</span>
+          </a>
+        );
+      })
+    }
+    <div class="mx-1 h-6 w-px bg-hairline" aria-hidden="true"></div>
+    <span class="group relative inline-flex">
+      <ThemeToggle />
+      <span class={tooltipClass}>Toggle theme</span>
+    </span>
+    <div class="mx-1 h-6 w-px bg-hairline" aria-hidden="true"></div>
+    <a
+      href="mailto:mattbegnochedev@gmail.com?subject=Hello!"
+      aria-label="Say Hi"
+      class="group relative flex h-10 w-10 items-center justify-center rounded-m bg-accent text-white transition-colors duration-200 hover:bg-accent-dark"
+    >
+      <MessageIcon class="h-5 w-5" />
+      <span class={tooltipClass}>Say Hi</span>
+    </a>
+  </div>
+</nav>

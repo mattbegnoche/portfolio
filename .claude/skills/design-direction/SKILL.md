@@ -5,51 +5,46 @@ description: Design and layout conventions for the portfolio site. Use when buil
 
 # Design Direction
 
-Derived from three reference sites the user picked (heyderekj.com, jonathanmoore.com, yevtam.com). Common thread across all three: restraint. Personality comes from typography and structure, not color or decoration.
+Round 3: rebuilt to match a Webflow export the user preferred (`matt-begnoche-dev.webflow/`, kept in the repo as a design reference only — its HTML/CSS/JS is not used directly, everything is rebuilt in Astro + Tailwind v4). This **replaces** the earlier minimalist/monochrome direction from rounds 1–2 — don't mix the two.
 
 ## Color
 
-- Single dark palette, no light/dark toggle — `--color-paper: #05070d` (near-black background), `--color-ink: #eef0f3` (light text). One theme, applied sitewide.
-- One accent color, used sparingly — links, hover states, focus rings, active nav item, the logo mark. Nothing else gets colored.
-- Accent is the blue-green from the logo: `--color-accent: #46d4b1`. Defined once in `src/styles/global.css` — always reference the token/utility (`text-accent`, `border-accent`, etc.), never hardcode the hex in a component.
-- Tailwind `@theme` tokens: `--color-ink`, `--color-paper`, `--color-accent`, `--color-muted`, `--color-hairline`. Don't reach for a broader palette than this.
+- Light theme: white page background (`--color-paper`), near-black text (`--color-ink`), grey surface for cards/nav (`--color-surface: #f7f7f7`).
+- Accent: `--color-accent: #1e6ef4` (blue), `--color-accent-dark: #1a5ecf` for hover.
+- Status/success color: `--color-green: #35c759` (online-status dot, etc).
+- Muted/secondary text: use `text-black/50` or `text-ink/50` (Tailwind opacity modifier), not a separate token.
+- Hairline borders: `--color-hairline` (~7% black).
 
-## Background
+## Radii — used everywhere, favor the largest tokens
 
-- Plain solid `--color-paper` background, everywhere. **No decorative background shapes** (tried a starfield + nebula-glow treatment in round 2 — explicitly rejected, don't reintroduce circles/blobs/gradients as page decoration without being asked again).
-- If a future request wants a background treatment, confirm the specific look first rather than building a full effect speculatively.
-
-## Logo
-
-- `src/components/Logo.astro` — inline SVG mark, fill set to `currentColor` so it inherits whatever text color wraps it (in the header, that's `text-accent`).
-- Used in `Header.astro` at `h-9 w-auto` (links to `/`) and as `public/favicon.svg` (hardcoded to `#1eac89` there since favicons don't inherit page CSS).
-- Treat it as the one piece of non-typographic branding on the site — don't introduce other icons/illustrations without a reason.
+- Scale: `--radius-xxxs`(8px) → `--radius-xxl`(32px), plus `--radius-pill`(1000px) and native `rounded-full` for circles.
+- `xxl` is the dominant "big card" radius (bento cards, work cards). `pill` is for buttons/badges/nav container. Don't undersize — err toward the bigger end of the scale.
 
 ## Typography
 
-- Sans: **Geist Sans** (self-hosted via `@fontsource/geist-sans`, weights 400/500/700). Chosen for a soft, rounded, low-contrast letterform that matches the rounded logo mark while still reading as tech/modern rather than decorative — do not mix in another display font.
-- Mono: **Geist Mono** (`@fontsource/geist-mono`, weight 400 only — nothing in mono needs medium/bold), reserved for metadata only: dates, tags, project status, section labels. This is the typographic personality move — use it deliberately, not everywhere.
-- Both are imported in `src/styles/global.css` and set as `--font-sans` / `--font-mono` theme tokens. If a component needs a new weight, add the matching `@fontsource/.../latin-{weight}.css` import rather than pulling in the full unsubset font.
-- Hierarchy comes from weight and size steps, not color.
+- Sans: **Inter** (self-hosted via `@fontsource/inter`, weights 300–700), used everywhere — headings, body, nav.
+- Mono: **DM Mono** (`@fontsource/dm-mono`, weight 400/500), used sparingly for metadata/eyebrow labels (`font-mono text-xs uppercase text-ink/50`) and the one code-snippet mockup on the About-cards "Coding Since" card.
 
-## Layout
+## Components & pattern library
 
-- Single column, vertical flow. No multi-column dashboards, no sidebar.
-- Section headers use a consistent typographic marker (pick one motif and use it everywhere — e.g. a `/` or numbered prefix before each section name) rather than boxes/cards with heavy borders.
-- Project entries: thumbnail/title/date/tags as a simple stacked row, not a heavy bordered card. A single hairline divider between entries is enough.
-- Generous vertical whitespace between sections — err toward more breathing room, not less.
+- `PillNav.astro` — fixed bottom-center floating pill nav (Home/Works/About icons + divider + accent "Say Hi" mailto button). Active page gets `bg-accent text-white`; inactive gets `text-ink/70 hover:bg-black/5`.
+- `Ticker.astro` — CSS-only marquee (two rows, opposite `animation-direction`, `prefers-reduced-motion` disables it), pastel `emoji-pill` chips (9 named color pairs defined in `global.css` — `.pill-default`, `.pill-warm-beige`, etc). **Stats are placeholders (`X+`) pending real numbers — don't invent figures.**
+- `AboutCards.astro` — bento grid of cards (`rounded-xxl bg-surface`) mixing personal facts, emoji, and Matt's real memoji images (`public/images/memoji/`).
+- `TechStack.astro` — 4-category tool list using real brand SVGs from `public/images/tools/` (not an icon font/library — these are the actual Webflow-exported brand assets).
+- `WorkCard.astro` — project card (cover image optional, graceful "No preview yet" fallback), links to `/works/[id]`.
+- `SkillBlock.astro`, `ExperienceBlock.astro`, `ValueBlock.astro`, `QuoteBlock.astro` — About/work-detail building blocks.
+- Emoji illustrations (`public/images/emoji/`, 33 files) are used pervasively as lightweight decoration — this design embraces that, unlike the earlier "no decorative shapes" rule from round 2 (which is superseded).
 
-## Navigation
+## Pages
 
-- The site is a single long page (`index.astro`) plus deep-linkable `/projects/[id]` detail pages — no separate Home/Projects/About routes. Section anchors (e.g. `id="projects"`) support in-page linking (used by the project detail page's back-link, `/#projects`).
-- Header is just the logo (left) and a `[Contact me]` mailto link (right) — no page nav list.
-- Footer holds social/contact links (email, GitHub, etc.) in the same plain-text style, GitHub opens in a new tab.
+- Full multi-page: `/` (Home), `/works` (listing), `/works/[id]` (detail), `/about`, `/404`, `/changelog`, `/licenses`.
+- Every page's primary section has `id="hero"` — footer's "Back to Top" links to `#hero` on the current page.
+
+## Content accuracy
+
+- Project data schema (`src/content.config.ts`) matches the Webflow CMS fields (`type`, `role`, `year`, `cover`, `icon`, `mockup`, `quote`, `attribution`, `avatar`) — the export's own CMS CSV was unmodified template demo data, not reused as content, only as a schema reference.
+- Never port Webflow-template bugs/placeholders at face value: fix leftover template branding (e.g. "Jordan Bluren", `hello@bluren.dev`) rather than carrying them over. When real data isn't available yet (social URLs, project screenshots, ticker stats), leave an obvious placeholder (`href="#"` + TODO comment, "No preview yet", `X+`) rather than fabricating something that reads as real.
 
 ## Motion
 
-- Restrained by default: simple CSS transitions (opacity/transform, ~150–250ms) on hover/focus only.
-- No animation library (GSAP etc.) for round 1 — add one later only if a specific interaction actually needs it. Don't build motion infrastructure speculatively.
-
-## Tone
-
-- Confident and understated. Let the work and the writing carry personality; the UI should get out of the way.
+- Marquee ticker (CSS `@keyframes`, no JS library) is the one sanctioned continuous-motion element. Otherwise stay restrained: simple hover/focus color transitions only.

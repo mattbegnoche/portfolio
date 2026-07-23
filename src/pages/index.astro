@@ -1,73 +1,65 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ProjectCard from "../components/ProjectCard.astro";
+import Ticker from "../components/Ticker.astro";
+import AboutCards from "../components/AboutCards.astro";
+import WorksSlider from "../components/WorksSlider.astro";
+import TechStack from "../components/TechStack.astro";
 import { getCollection } from "astro:content";
 
-const projects = (await getCollection("projects")).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+const projects = (await getCollection("projects", ({ data }) => data.featured)).sort(
+  (a, b) => Number(b.data.year) - Number(a.data.year),
 );
-
-const roles = [
-  {
-    title: "Website Developer",
-    org: "GoGuardian",
-    period: "Jun. 2024 – Present",
-    bullets: ["Full-time"],
-  },
-  {
-    title: "Website Developer",
-    org: "One Branding",
-    period: "Feb. 2022 – Present",
-    bullets: ["Freelance"],
-  },
-  {
-    title: "Logistics Officer",
-    org: "Iowa National Guard",
-    period: "Jun. 2022 – Present",
-    bullets: ["Part-time"],
-  },
-];
 ---
 
 <BaseLayout title="Home">
-  <section>
-    <p class="font-mono text-sm text-muted uppercase">/ hello</p>
-    <h1 class="mt-3 text-3xl font-bold sm:text-4xl uppercase">Matthew Begnoche</h1>
-    <p class="mt-4 max-w-xl text-muted">
-      Software engineer building full-stack web apps and local-first tools. Currently a website
-      developer at GoGuardian.
-    </p>
+  <section id="hero" class="flex flex-col items-center gap-6 py-12 text-center">
+    <div class="relative">
+      <img
+        src="/images/memoji/hero.avif"
+        alt="Matt Begnoche"
+        class="h-24 w-24 rounded-full object-cover"
+      />
+      <span
+        class="absolute right-0 bottom-0 h-4 w-4 rounded-full bg-green ring-2 ring-paper"
+        aria-hidden="true"
+        title="Available"
+      ></span>
+    </div>
+    <h1 class="max-w-xl text-3xl font-medium sm:text-4xl">
+      Hi, I'm Matt. <span class="text-ink/50">I press buttons and interfaces happen</span>
+    </h1>
   </section>
 
-  <section id="projects" class="mt-16">
-    <p class="font-mono text-sm text-muted uppercase">/ projects</p>
+  <section class="mt-8">
+    <Ticker />
+  </section>
+
+  <section class="mt-16">
+    <AboutCards />
+  </section>
+
+  <section class="mt-16">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="font-mono text-xs text-ink/50 uppercase">Projects</p>
+        <h2 class="mt-2 text-2xl font-medium">Latest Projects</h2>
+      </div>
+      <a
+        href="/works"
+        class="inline-flex items-center gap-1.5 rounded-pill bg-surface px-4 py-2 text-sm font-medium transition-colors duration-200 hover:bg-black/5 dark:hover:bg-white/10"
+      >
+        View All
+      </a>
+    </div>
     <div class="mt-6">
-      {projects.map((project) => <ProjectCard project={project} />)}
+      <WorksSlider projects={projects} />
     </div>
   </section>
 
   <section class="mt-16">
-    <p class="font-mono text-sm text-muted uppercase">/ experience</p>
+    <p class="font-mono text-xs text-ink/50 uppercase">What I Use</p>
     <div class="mt-6">
-      {
-        roles.map((role) => (
-          <div class="border-b border-hairline py-6 first:pt-0 last:border-none">
-            <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-              <h3 class="text-base font-medium">
-                {role.title} &mdash; {role.org}
-              </h3>
-              <p class="font-mono text-xs text-muted uppercase">{role.period}</p>
-            </div>
-            {role.bullets.length > 0 && (
-              <ul class="mt-2 flex flex-col gap-1 text-sm text-muted">
-                {role.bullets.map((bullet) => (
-                  <li>{bullet}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))
-      }
+      <TechStack />
     </div>
   </section>
 </BaseLayout>
