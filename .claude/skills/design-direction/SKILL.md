@@ -27,8 +27,9 @@ Derived from three reference sites the user picked (heyderekj.com, jonathanmoore
 
 ## Typography
 
-- One sans-serif for everything (headings, body, nav). Pick one modern, neutral system-adjacent face (e.g. system UI stack or a single Google/variable font) — do not mix multiple display fonts.
-- One monospace face reserved for metadata only: dates, tags, project status, section labels. This is the typographic personality move — use it deliberately, not everywhere.
+- Sans: **Geist Sans** (self-hosted via `@fontsource/geist-sans`, weights 400/500/700). Chosen for a soft, rounded, low-contrast letterform that matches the rounded logo mark while still reading as tech/modern rather than decorative — do not mix in another display font.
+- Mono: **Geist Mono** (`@fontsource/geist-mono`, weight 400 only — nothing in mono needs medium/bold), reserved for metadata only: dates, tags, project status, section labels. This is the typographic personality move — use it deliberately, not everywhere.
+- Both are imported in `src/styles/global.css` and set as `--font-sans` / `--font-mono` theme tokens. If a component needs a new weight, add the matching `@fontsource/.../latin-{weight}.css` import rather than pulling in the full unsubset font.
 - Hierarchy comes from weight and size steps, not color.
 
 ## Layout
@@ -40,8 +41,9 @@ Derived from three reference sites the user picked (heyderekj.com, jonathanmoore
 
 ## Navigation
 
-- Minimal, text-based nav — plain links, no button chrome. Bracket or underline treatment on hover is enough.
-- Footer holds social/contact links (email, GitHub, etc.) in the same plain-text style as nav.
+- The site is a single long page (`index.astro`) plus deep-linkable `/projects/[id]` detail pages — no separate Home/Projects/About routes. Section anchors (e.g. `id="projects"`) support in-page linking (used by the project detail page's back-link, `/#projects`).
+- Header is just the logo (left) and a `[Contact me]` mailto link (right) — no page nav list.
+- Footer holds social/contact links (email, GitHub, etc.) in the same plain-text style, GitHub opens in a new tab.
 
 ## Motion
 

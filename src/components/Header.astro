@@ -1,12 +1,5 @@
 ---
 import Logo from "./Logo.astro";
-
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-];
-const currentPath = Astro.url.pathname;
 ---
 
 <header class="border-b border-hairline">
@@ -14,28 +7,11 @@ const currentPath = Astro.url.pathname;
     <a href="/" class="text-accent transition-opacity duration-150 hover:opacity-80">
       <Logo class="h-9 w-auto" />
     </a>
-    <ul class="flex gap-6 font-mono text-sm">
-      {
-        navItems.map((item) => {
-          const isActive =
-            item.href === "/"
-              ? currentPath === "/"
-              : currentPath.startsWith(item.href);
-          return (
-            <li>
-              <a
-                href={item.href}
-                class:list={[
-                  "transition-colors duration-150 hover:text-ink",
-                  isActive ? "text-ink underline underline-offset-4" : "text-muted",
-                ]}
-              >
-                {item.label}
-              </a>
-            </li>
-          );
-        })
-      }
-    </ul>
+    <a
+      href="mailto:mattbegnochedev@gmail.com"
+      class="font-mono text-sm text-accent transition-colors duration-150 hover:underline"
+    >
+      [Contact me]
+    </a>
   </nav>
 </header>
